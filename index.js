@@ -1,5 +1,6 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
+const inquirerPrompts = require('./util/inquirerPrompts');
 
 // !!!! Not sure if I need this !!!!!
 const fs = require('fs');
@@ -7,19 +8,7 @@ const fs = require('fs');
 
 
 
-// EXAMPLE CODE: Function to write README file
-// function saveToDB(fileName, data) {
-//     fs.writeFile(`README.md`, generateMarkdown(data), err => {
-//         if (err) {
-//             console.log(err, "writeToFile");
-//             return;
-//         }
-//         else {
-//             console.log("yay!");
-//         }
-//     }
-//     )
-// };
+// !!!! Write function saveToDB
 
 
 
