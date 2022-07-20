@@ -1,4 +1,5 @@
 // An array of questions for user input
+// Default prompt is initialPrompt
 const initialPrompt = [
     {
         type: 'list',
@@ -14,7 +15,7 @@ const initialPrompt = [
     },
 ];
 
-
+// Concatonates initialPrompt with addDeptPrompt
 const addDeptPrompt = initialPrompt.concat([
     {
         type: 'input',
@@ -23,7 +24,7 @@ const addDeptPrompt = initialPrompt.concat([
     }
 ]);
 
-
+// Concatonates initialPrompt with addRolePrompt
 const addRolePrompt = initialPrompt.concat([
     {
         type: 'input',
@@ -45,7 +46,7 @@ const addRolePrompt = initialPrompt.concat([
     }
 ]);
 
-
+// Concatonates initialPrompt with addEmplPrompt
 const addEmplPrompt = initialPrompt.concat([
     {
         type: 'input',
@@ -73,7 +74,7 @@ const addEmplPrompt = initialPrompt.concat([
     }
 ]);
 
-
+// Concatonates initialPrompt with updateRolePrompt
 const updateRolePrompt = initialPrompt.concat([
     {
         type: 'input',
