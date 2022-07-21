@@ -8,5 +8,5 @@ const connection = mysql.createConnection({
     database: 'employee_db', 
 }).promise();
 
-modules.exports = connection;
+module.exports = connection;
 

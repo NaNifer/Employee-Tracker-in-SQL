@@ -19,7 +19,7 @@ const initialPrompt = [
 const addDeptPrompt = initialPrompt.concat([
     {
         type: 'input',
-        message: 'Whst is the name of the department?',
+        message: 'What is the name of the department?',
         name: 'deptName'
     }
 ]);
@@ -92,4 +92,10 @@ const updateRolePrompt = initialPrompt.concat([
     }
 ]);
 
-module.exports = inquirerPrompts;
+module.exports = {
+    initialPrompt,
+    addDeptPrompt,
+    addRolePrompt,
+    addEmplPrompt,
+    updateRolePrompt
+};

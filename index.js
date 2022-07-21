@@ -1,10 +1,29 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
-const inquirerPrompts = require('./util/inquirerPrompts');
+const router = require('express').Router();
+const connection = require('./config/connection');
 
-// !!!! Not sure if I need this !!!!!
-const fs = require('fs');
+// Rewrote to destructure prompts
+// const inquirerPrompts = require('./util/inquirerPrompts');
+const { initialPrompt,
+    addDeptPrompt,
+    addRolePrompt,
+    addEmplPrompt,
+    updateRolePrompt } = require('./util/inquirerPrompts');
 
+
+// Get query
+router.get('/', async (req,res) => {
+    try {
+        const getAllEmpl = 'SELECT * FROM employee;';
+        const dbResponse = await connection.query(getAllEmpl);
+        console.log(dbReponse);
+
+    } catch (error) {
+        console.log(error);
+        res.json(error);
+    }
+});
 
 
 
@@ -28,3 +47,6 @@ function init() {
 
 // Function call to initialize app
 init();
+
+
+module.exports = router;
