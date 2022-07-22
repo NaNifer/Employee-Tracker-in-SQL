@@ -11,21 +11,22 @@ const initialPrompt = [
             'Add a department', 
             'Add a role', 
             'Add an employee',
-            'Update an employee role'],
+            'Update an employee role',
+            'EXIT'],
     },
 ];
 
 // Concatonates initialPrompt with addDeptPrompt
-const addDeptPrompt = initialPrompt.concat([
+const addDeptPrompt = initialPrompt [
     {
         type: 'input',
         message: 'What is the name of the department?',
         name: 'deptName'
     }
-]);
+];
 
 // Concatonates initialPrompt with addRolePrompt
-const addRolePrompt = initialPrompt.concat([
+const addRolePrompt = initialPrompt [
     {
         type: 'input',
         message: 'What is the name of the role?',
@@ -44,10 +45,10 @@ const addRolePrompt = initialPrompt.concat([
             // Insert choices from database
         ]
     }
-]);
+];
 
 // Concatonates initialPrompt with addEmplPrompt
-const addEmplPrompt = initialPrompt.concat([
+const addEmplPrompt = initialPrompt [
     {
         type: 'input',
         message: 'What is the employees first name?',
@@ -72,10 +73,10 @@ const addEmplPrompt = initialPrompt.concat([
             // Insert FULL NAME choices from database
         ]
     }
-]);
+];
 
 // Concatonates initialPrompt with updateRolePrompt
-const updateRolePrompt = initialPrompt.concat([
+const updateRolePrompt = initialPrompt [
     {
         type: 'input',
         message: 'Which employee would you like to update?',
@@ -90,7 +91,7 @@ const updateRolePrompt = initialPrompt.concat([
             // Insert ROLE choices from database
         ]
     }
-]);
+];
 
 module.exports = {
     initialPrompt,

@@ -1,9 +1,17 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
-const router = require('express').Router();
 const connection = require('./config/connection');
 
-// Rewrote to destructure prompts
+// Import queries
+const {
+    getAllDpt,
+    getAllEmployees,
+    addDept,
+    addRole,
+    addEmpl,
+    changeRole } = require('./config/queries');
+
+// Import Prompts
 // const inquirerPrompts = require('./util/inquirerPrompts');
 const { initialPrompt,
     addDeptPrompt,
@@ -12,38 +20,58 @@ const { initialPrompt,
     updateRolePrompt } = require('./util/inquirerPrompts');
 
 
-// Get query
-router.get('/', async (req,res) => {
-    try {
-        const getAllEmpl = 'SELECT * FROM employee;';
-        const dbResponse = await connection.query(getAllEmpl);
-        console.log(dbReponse);
 
-    } catch (error) {
-        console.log(error);
-        res.json(error);
-    }
-});
-
-
-
-// !!!! Write function saveToDB
+// // EXAMPLE Function to initialize app
+// function init async () {
+//     inquirer
+//         .prompt(questions)
+//         .then(answers => {
+//             saveToDB(answers.fileName, answers);
+//         })
+//         .catch(err => {
+//             console.log(err);
+//         })
+// };
 
 
+// !!! Nolan suggested console.table for displaying queries
 
 
-// Function to initialize app
-// !!!!!!  Need to create function "saveToDB" above !!!!!!!
-function init() {
+// !!!! NEED TO write function saveToDB
+// Initialize Inquirer
+function init async () => {
     inquirer
-        .prompt(questions)
-        .then(answers => {
-            saveToDB(answers.fileName, answers);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        .prompt(initialPrompt)
+        .then(val => {
+            if (val.option === "View all departments") {
+                inquirer
+                .prompt(addDeptPrompt)
+                .then()
+                // !!!! Query to db for dept !!!!
+                // !!!! Display query results !!!!
+            } else if (val.option === "View all employees") {
+                // !!!! Query to db for dept !!!!
+                // !!!! Display query results !!!!
+            } else if (val.option === "Add a department") {
+                // !!!! Query to db for dept !!!!
+                // !!!! Display query results !!!!
+            } else if (val.option === "Add a role") {
+                // !!!! Query to db for dept !!!!
+                // !!!! Display query results !!!!
+            } else if (val.option === "Add an employee") {
+                // !!!! Query to db for dept !!!!
+                // !!!! Display query results !!!!
+            } else if (val.option === "Update an employee role") {
+                // !!!! Query to db for dept !!!!
+                // !!!! Display query results !!!!
+            }
+            else {
+                return;
+            }
+        });
 };
+
+
 
 // Function call to initialize app
 init();
