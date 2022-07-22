@@ -51,7 +51,7 @@ THEN I am prompted to enter the name, salary, and department for the role and th
 WHEN I choose to add an employee
 THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
 WHEN I choose to update an employee role
-THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
+THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 ```
 
 ### Screenshot
@@ -122,8 +122,8 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
+Nolan suggested console.table for displaying queries. Corrected me about my confusion of exporting/inporting other functions.
 
-A huge shout out to [nullaus](https://github.com/nullaus) who helped me understand how databases, routes, and asychronous queries. 
+A huge shout out to [nullaus](https://github.com/nullaus) who helped me understand how databases, routes, and asychronous queries.
 
 **Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
