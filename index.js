@@ -4,12 +4,12 @@ const connection = require("./config/connection");
 
 // Import queries
 const {
-  getAllDpt,
-  getAllEmployees,
-  addDept,
-  addRole,
-  addEmpl,
-  changeRole,
+  allDptQuery,
+  allEmplQuery,
+  addDptQuery,
+  addRoleQuery,
+  addEmplQuery,
+  changeRoleQuery,
 } = require("./config/queries");
 
 // Import Prompts
@@ -40,37 +40,40 @@ async function init() {
       ],
     },
   ];
-
   const askQ = await inquirer.prompt(initialPrompt);
-
   if (askQ.chooseTask === "View all employees") {
     try {
-      const employees = await connection.query(getAllEmployees);
-      console.table("All Employees", employees[0]);
+      console.log("L46", askQ.chooseTask);
+      const employees = await connection.query(allEmplQuery);
+      console.log("\n\n\n\n\n\nALL EMPLOYEES");
+      console.table(employees[0]);
     } catch (error) {
       console.log(error);
     }
+    init();
   } else if (askQ.chooseTask === "View all departments") {
     try {
-      const departments = await connection.query(getAllDpt);
+      const departments = await connection.query(allDptQuery);
       console.log("\n\n\n\n\n\nALL DEPARTMENTS");
       console.table(departments[0]);
       // !!!!! I want to remove the index reference from the table (above).
     } catch (error) {
       console.log(error);
     }
+    init();
   } else if (askQ.chooseTask === "Add a department") {
-    // !!!! Add addDeptPrompt
-    // !!!! Query to db for dept !!!!
-    // !!!! Display query results !!!!
+    addDptFunc();
+    init();
   } else if (askQ.chooseTask === "Add a role") {
     // !!!! Add addRolePrompt
     // !!!! Query to db for dept !!!!
     // !!!! Display query results !!!!
+    init();
   } else if (askQ.chooseTask === "Add an employee") {
     // !!!! Add addEmplPrompt
     // !!!! Query to db for dept !!!!
     // !!!! Display query results !!!!
+    init();
   } else if (askQ.chooseTask === "Update an employee role") {
     // !!!! Add updateRolePrompt
     // !!!! Query to db for dept !!!!
@@ -79,6 +82,12 @@ async function init() {
     return;
   }
 }
+
+const addDptFunc = async () => {
+  // !!!! Add addDeptPrompt
+  // !!!! Query to db for dept !!!!
+  // !!!! Display query results !!!!
+};
 
 // Function call to initialize app
 init();

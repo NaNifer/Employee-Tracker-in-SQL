@@ -1,35 +1,41 @@
+// EXAMPLE for concat in queries:
+// SELECT
+//     CONCAT_WS(', ', lastName, firstname)
+// FROM
+//     employees;
+
 // VIEW all Departments
-const getAllDpt = `SELECT department.id AS ID, department.name AS Department
+const allDptQuery = `SELECT department.id AS ID, department.name AS Department
 FROM department;`;
 
 // VIEW all employees
-const getAllEmployees = `SELECT employee.id AS ID, employee.first_name AS 'First Name', employee.last_name AS 'Last Name', role.title AS Title, department.name AS Department
-FROM employee 
-INNER JOIN role ON employee.role_id = role.id 
-LEFT JOIN employee ON employee.manager_id = manager_id 
-INNER JOIN department AS Department;`;
+const allEmplQuery = `SELECT empl.id AS ID, empl.first_name AS 'First Name', empl.last_name AS 'Last Name', role.title AS Title, dpt.name AS Department
+FROM employee AS empl
+INNER JOIN role ON empl.role_id = role.id 
+LEFT JOIN employee AS mgr ON empl.manager_id = mgr.id 
+INNER JOIN department AS dpt;`;
 
 // ADD a department with 'deptName' from prompts
-const addDept = `INSERT INTO department(name)
+const addDptQuery = `INSERT INTO department(name)
 VALUES (?);`;
 
 // ADD a Role, incl Salary & DeptName
-const addRole = `
+const addRoleQuery = `
 ;`;
 
 // ADD an Employee, incl FirstName, LastName, Role, and Manager
-const addEmpl = `
+const addEmplQuery = `
 ;`;
 
 // MODIFY an Employee's Role
-const changeRole = `
+const changeRoleQuery = `
 ;`;
 
 module.exports = {
-  getAllDpt,
-  getAllEmployees,
-  addDept,
-  addRole,
-  addEmpl,
-  changeRole,
+  allDptQuery,
+  allEmplQuery,
+  addDptQuery,
+  addRoleQuery,
+  addEmplQuery,
+  changeRoleQuery,
 };
