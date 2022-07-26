@@ -1,6 +1,12 @@
 // Packages needed for this application
 const inquirer = require("inquirer");
 
+const { dptList,
+roleList,
+mgrList,
+emplList
+} = require('./util/dbPromptChoices');
+
 // Require title
 const displayTitle = require('./util/EmployMgrASCI');
 
@@ -40,40 +46,10 @@ async function init() {
           return answers.chooseTask === "Add a department";
         },
       },
-      // {
-      //   type: "input",
-      //   message: "What is the name of the role?",
-      //   name: "roleName",
-      //   when(answers) {
-      //     answers.chooseTask === "Add a role";
-      //   },
-      // },
-      // {
-      //   type: "input",
-      //   message: "What is the salary of the role?",
-      //   name: "roleSalary",
-      //   when(answers) {
-      //     answers.chooseTask === "Add a role";
-      //   },
-      // },
-      // {
-      //   type: "input",
-      //   message: "Which department does the role belong to?",
-      //   name: "roleDepartment",
-      //   choices: [
-      //     // Insert choices from database
-      //   ],
-      //   when(answers) {
-      //     return answers.chooseTask === "Add Role";
-      //   },
-      // },
-
       {
         type: "input",
         message: "Which employee would you like to update?",
-        choices: [
-          // Insert FULL NAME choices from database
-        ],
+        choices: await emplList(),
         when(answers) {
           return answers.chooseTask === "Update an employee role";
         },
@@ -81,23 +57,21 @@ async function init() {
       {
         type: "input",
         message: "Which role would you like to assign the employee?",
-        choices: [
-          // Insert ROLE choices from database
-        ],
+        choices: await roleList(),
         when(answers) {
           return answers.chooseTask === "Update an employee role";
         },
       },
     ])
     .then((answers) => {
-      console.log(answers.chooseTask, "line 124 index");
-      console.log(answers, "Line 125 index");
       if (answers.chooseTask === "View all departments") {
         displayDept();
+        dptList();
       } else if (answers.chooseTask === "View all employees") {
         displayEmpl();
       } else if (answers.chooseTask === "Add a department") {
         addDept(answers);
+
       } else if (answers.chooseTask === "Add a role") {
         addRole(answers);
       } else if (answers.chooseTask === "Add an employee") {

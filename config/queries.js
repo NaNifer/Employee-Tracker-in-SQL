@@ -14,12 +14,12 @@ const addDptQuery = `INSERT INTO department(name)
 VALUES (?);`;
 
 // ADD a Role, incl Salary & DeptName
-const addRoleQuery = `
-;`;
+const addRoleQuery = `INSERT INTO role(title, salary, department_id)
+VALUES (?, ?, ?);`;
 
 // ADD an Employee, incl FirstName, LastName, Role, and Manager
-const addEmplQuery = `
-;`;
+const addEmplQuery = `INSERT INTO employee(first_name, last_name, role_id, manager_id)
+VALUES (?, ?, ?, ?);`;
 
 // MODIFY an Employee's Role
 const changeRoleQuery = `
