@@ -34,7 +34,7 @@ async function displayEmpl() {
 
 async function addDept(answers) {
   try {
-    // POST to DB
+    await connection.query(addDptQuery);
     console.log(`${answers.deptName} Department Added`);
   } catch (error) {
     console.log(error);
@@ -66,7 +66,7 @@ async function addRole(answers) {
     try {
       // POST to DB
       console.log(
-        `${answers.roleName}, salary ${answers.roleSalary}, has been added to the ${answers.roleDepartment} department.`
+        `${answers.roleName} salary ${answers.roleSalary} has been added to the ${answers.roleDepartment} department.`
       );
     } catch (error) {
       console.log(error);
@@ -75,7 +75,7 @@ async function addRole(answers) {
 }
 
 async function addEmpl(answers) {
-  addEmplPrompt = [
+  const addEmplPrompt = [
     {
       type: "input",
       message: "What is the employees first name?",
@@ -104,15 +104,16 @@ async function addEmpl(answers) {
     },
   ];
   inquirer.prompt(addEmplPrompt).then((answers) => {
-  try {
-    // POST to DB
-    console.log(
-      `${answers.firstName} ${answers.lastName}, position ${answers.emplRole}, has been added on ${answers.emplMgr}'s team.`
-    );
-  } catch (error) {
-    console.log(error);
-  }
-});
+    try {
+      // POST to DB
+      console.log(
+        `${answers.firstName} ${answers.lastName}, position ${answers.emplRole}, has been added on ${answers.emplMgr}'s team.`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
 
 async function updateRole(answers) {
   try {

@@ -1,19 +1,13 @@
-// EXAMPLE for concat in queries:
-// SELECT
-//     CONCAT_WS(', ', lastName, firstname)
-// FROM
-//     employees;
-
 // VIEW all Departments
 const allDptQuery = `SELECT department.id AS ID, department.name AS Department
 FROM department;`;
 
 // VIEW all employees
-const allEmplQuery = `SELECT empl.id AS ID, empl.first_name AS 'First Name', empl.last_name AS 'Last Name', role.title AS Title, dpt.name AS Department
-FROM employee AS empl
-INNER JOIN role ON empl.role_id = role.id 
-LEFT JOIN employee AS mgr ON empl.manager_id = mgr.id 
-INNER JOIN department AS dpt;`;
+const allEmplQuery = `SELECT employee.id AS ID, employee.first_name AS 'First Name', employee.last_name AS 'Last Name', role.title AS Title, department.name AS Department, role.salary AS Salary, CONCAT_WS(', ', mgr.last_name, mgr.first_name) AS Manager
+FROM employee
+INNER JOIN role ON employee.role_id = role.id 
+LEFT JOIN employee AS mgr ON employee.manager_id = mgr.id 
+INNER JOIN department ON role.department_id = department.id;`;
 
 // ADD a department with 'deptName' from prompts
 const addDptQuery = `INSERT INTO department(name)
