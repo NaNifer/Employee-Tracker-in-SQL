@@ -1,6 +1,9 @@
 // Packages needed for this application
 const inquirer = require("inquirer");
 
+// Require title
+const displayTitle = require('./util/EmployMgrASCI');
+
 const {
   displayDept,
   displayEmpl,
@@ -12,6 +15,7 @@ const {
 
 // Initialize Inquirer
 async function init() {
+  displayTitle();
   inquirer
     .prompt([
       {
@@ -106,3 +110,5 @@ async function init() {
 
 // Function call to initialize app
 init();
+
+
