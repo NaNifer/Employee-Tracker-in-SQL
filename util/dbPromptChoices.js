@@ -1,16 +1,18 @@
 const connection = require("../config/connection");
 
+
 // Functions for choices for inquirer prompts
 
 async function dptList() {
-    const departmentQuery = `SELECT id, name FROM department;`;
+    const departmentQuery = `SELECT id AS value, name FROM department;`;
     const departments = await connection.query(departmentQuery);
-    // console.log(departments);
+    console.log(departments, "departments from query line 8 dbPromptChoices");
+    console.log(departments[0]);
     return departments[0];
 }
 
 async function roleList() {
-    const rolesQuery = `SELECT id, title FROM role;`;
+    const rolesQuery = `SELECT id AS value, title AS name FROM role;`;
     const roles = await connection.query(rolesQuery);
     console.log(roles);
 

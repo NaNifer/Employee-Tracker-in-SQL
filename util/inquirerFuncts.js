@@ -4,7 +4,7 @@ const {dptList,
   roleList,
   mgrList,
   emplList} =  require('./dbPromptChoices');
-const { init } = require('../index');
+const cTable = require('console.table');
 
 // Import queries
 const {
@@ -19,24 +19,22 @@ const {
 async function displayDept() {
   try {
     const departments = await connection.query(allDptQuery);
-    console.log("\n\n\n\n\n\nALL DEPARTMENTS");
+    console.log("\n\n\n\n\n\n          ALL DEPARTMENTS\n\n");
     console.table(departments[0]);
     // !!!!! I want to remove the index reference from the table (above).
   } catch (error) {
     console.log(error);
   }
-  init();
 }
 
 async function displayEmpl() {
   try {
     const employees = await connection.query(allEmplQuery);
-    console.log("\n\n\n\n\n\nALL EMPLOYEES");
+    console.log("\n\n\n\n\n\n                                    ALL EMPLOYEES\n\n ");
     console.table(employees[0]);
   } catch (error) {
     console.log(error);
   }
-  init();
 }
 
 async function addDept(answers) {
@@ -55,7 +53,6 @@ async function addDept(answers) {
     console.log(error);
   }
 });
-init();
 }
 
 async function addRole(answers) {
@@ -74,7 +71,7 @@ async function addRole(answers) {
       type: "list",
       message: "Which department does the role belong to?",
       name: "roleDepartment",
-      choices: dptList()
+      choices: await dptList()
       ,
     },
   ];
@@ -88,7 +85,6 @@ async function addRole(answers) {
       console.log(error);
     }
   });
-  init();
 }
 
 async function addEmpl(answers) {
@@ -126,7 +122,6 @@ async function addEmpl(answers) {
       console.log(error);
     }
   });
-  init();
 }
 
 async function updateRole(answers) {
@@ -154,7 +149,6 @@ async function updateRole(answers) {
     console.log(error);
   }
 });
-init();
 }
 
 

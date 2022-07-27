@@ -1,5 +1,6 @@
 // Packages needed for this application
 const inquirer = require("inquirer");
+const cTable = require('console.table');
 
 // List of choices for inquirer prompts imported
 const { dptList,
@@ -21,7 +22,7 @@ const {
 } = require("./util/inquirerFuncts");
 
 // Initialize Inquirer
-async function init() {
+const init = async () => {
   inquirer
     .prompt([
       {
@@ -52,14 +53,13 @@ async function init() {
         addEmpl(answers);
       } else if (answers.chooseTask === "Update an employee role") {
         updateRole(answers);
-      }
+      } if (answers.chooseTask !== "EXIT") {
+        init();}
     });
 }
 
 // Function call to display title of app andinitialize app
 displayTitle();
 init();
-
-module.exports = { init };
 
 
