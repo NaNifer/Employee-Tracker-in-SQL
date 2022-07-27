@@ -4,6 +4,7 @@ const {dptList,
   roleList,
   mgrList,
   emplList} =  require('./dbPromptChoices');
+const { init } = require('../index');
 
 // Import queries
 const {
@@ -24,6 +25,7 @@ async function displayDept() {
   } catch (error) {
     console.log(error);
   }
+  init();
 }
 
 async function displayEmpl() {
@@ -34,15 +36,26 @@ async function displayEmpl() {
   } catch (error) {
     console.log(error);
   }
+  init();
 }
 
 async function addDept(answers) {
+  const addDeptPrompt = [
+    {
+      type: "input",
+      message: "What is the name of the department?",
+      name: "deptName",
+    },
+  ];
+  await inquirer.prompt(addDeptPrompt).then((answers) => {
   try {
-    await connection.query(addDptQuery, answers.deptName);
+    connection.query(addDptQuery, answers.deptName);
     console.log(`${answers.deptName} Department Added`);
   } catch (error) {
     console.log(error);
   }
+});
+init();
 }
 
 async function addRole(answers) {
@@ -58,16 +71,16 @@ async function addRole(answers) {
       name: "roleSalary",
     },
     {
-      type: "input",
+      type: "list",
       message: "Which department does the role belong to?",
       name: "roleDepartment",
-      choices: [ await dptList()
-      ],
+      choices: dptList()
+      ,
     },
   ];
   await inquirer.prompt(addRolePrompt).then((answers) => {
     try {
-      connection.query(addRoleQuery, answers.roleName, answers.roleSalary, answers.roleDepartment);
+      connection.query(addRoleQuery, [answers.roleName, answers.roleSalary, answers.roleDepartment]);
       console.log(
         `${answers.roleName} salary ${answers.roleSalary} has been added to the ${answers.roleDepartment} department.`
       );
@@ -75,6 +88,7 @@ async function addRole(answers) {
       console.log(error);
     }
   });
+  init();
 }
 
 async function addEmpl(answers) {
@@ -90,13 +104,13 @@ async function addEmpl(answers) {
       name: "lastName",
     },
     {
-      type: "input",
+      type: "list",
       message: "What is the employees role?",
       name: "emplRole",
       choices: await roleList(),
     },
     {
-      type: "input",
+      type: "list",
       message: "Who is the employees manager?",
       name: "emplMgr",
       choices: await mgrList(),
@@ -104,7 +118,7 @@ async function addEmpl(answers) {
   ];
   await inquirer.prompt(addEmplPrompt).then((answers) => {
     try {
-      // POST to DB
+      connection.query(addEmplQuery, [answers.firstName, answers.lastName, answers.emplRole, answers.emplMgr]);
       console.log(
         `${answers.firstName} ${answers.lastName}, position ${answers.emplRole}, has been added on ${answers.emplMgr}'s team.`
       );
@@ -112,16 +126,37 @@ async function addEmpl(answers) {
       console.log(error);
     }
   });
+  init();
 }
 
 async function updateRole(answers) {
+  const updateRolePrompt = [  
+    {
+    type: "list",
+    message: "Which employee would you like to update?",
+    name: "emplName",
+    choices: await emplList(),
+   
+  },
+  {
+    type: "list",
+    message: "Which role would you like to assign the employee?",
+    name: "emplNewRole",
+    choices: await roleList(),
+    },
+  ];
+  await inquirer.prompt(updateRolePrompt).then((answers) => {
+  console.log(answers, "line 134 inquirerPrompts");
   try {
-    // POST to DB
-    console.log("Role Updated");
+    connection.query(changeRoleQuery, [answers.emplName, answers.emplNewRole]);
+    console.log(`${answers.emplName} Role Updated ${toanswers.emplNewRole}`);
   } catch (error) {
     console.log(error);
   }
+});
+init();
 }
+
 
 module.exports = {
   displayDept,

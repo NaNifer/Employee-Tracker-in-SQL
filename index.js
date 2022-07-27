@@ -1,6 +1,7 @@
 // Packages needed for this application
 const inquirer = require("inquirer");
 
+// List of choices for inquirer prompts imported
 const { dptList,
 roleList,
 mgrList,
@@ -21,7 +22,6 @@ const {
 
 // Initialize Inquirer
 async function init() {
-  displayTitle();
   inquirer
     .prompt([
       {
@@ -38,40 +38,14 @@ async function init() {
           "EXIT",
         ],
       },
-      {
-        type: "input",
-        message: "What is the name of the department?",
-        name: "deptName",
-        when(answers) {
-          return answers.chooseTask === "Add a department";
-        },
-      },
-      {
-        type: "input",
-        message: "Which employee would you like to update?",
-        choices: await emplList(),
-        when(answers) {
-          return answers.chooseTask === "Update an employee role";
-        },
-      },
-      {
-        type: "input",
-        message: "Which role would you like to assign the employee?",
-        choices: await roleList(),
-        when(answers) {
-          return answers.chooseTask === "Update an employee role";
-        },
-      },
     ])
     .then((answers) => {
       if (answers.chooseTask === "View all departments") {
         displayDept();
-        dptList();
       } else if (answers.chooseTask === "View all employees") {
         displayEmpl();
       } else if (answers.chooseTask === "Add a department") {
         addDept(answers);
-
       } else if (answers.chooseTask === "Add a role") {
         addRole(answers);
       } else if (answers.chooseTask === "Add an employee") {
@@ -82,7 +56,10 @@ async function init() {
     });
 }
 
-// Function call to initialize app
+// Function call to display title of app andinitialize app
+displayTitle();
 init();
+
+module.exports = { init };
 
 

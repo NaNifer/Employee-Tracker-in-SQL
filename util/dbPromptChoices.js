@@ -33,11 +33,6 @@ async function roleList() {
     return employee[0];
  };
 
-//  dptList();
-//  roleList();
-//  mgrList();
-//  emplList();
-
  module.exports = {
     dptList,
     roleList,
