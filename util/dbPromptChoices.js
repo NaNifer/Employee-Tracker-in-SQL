@@ -20,17 +20,17 @@ async function roleList() {
  };
 
  async function mgrList() {
-    const managerQuery = `SELECT id, CONCAT(first_name, ', ', last_name) AS mgr FROM employee WHERE manager_id IS NULL;`;
+    const managerQuery = `SELECT id AS value, CONCAT(first_name, ', ', last_name) AS name FROM employee WHERE manager_id IS NULL;`;
     const managers = await connection.query(managerQuery);
-    console.log(managers);
+    console.log(managers, "line 25 mrlist funct");
 
     return managers[0];
  };
 
  async function emplList() {
-    const employeeQuery = `SELECT id, CONCAT(first_name, ', ', last_name) AS name FROM employee;`;
+    const employeeQuery = `SELECT id AS value, CONCAT(first_name, ', ', last_name) AS name FROM employee;`;
     const employee = await connection.query(employeeQuery);
-    console.log(employee);
+    console.log(employee, "line 33 epllist");
 
     return employee[0];
  };

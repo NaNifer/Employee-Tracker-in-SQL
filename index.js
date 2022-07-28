@@ -3,17 +3,18 @@ const inquirer = require("inquirer");
 const cTable = require('console.table');
 
 // List of choices for inquirer prompts imported
-const { dptList,
-roleList,
-mgrList,
-emplList
-} = require('./util/dbPromptChoices');
+// const { dptList,
+// roleList,
+// mgrList,
+// emplList
+// } = require('./util/dbPromptChoices');
 
 // Require title
 const displayTitle = require('./util/EmployMgrASCI');
 
 const {
   displayDept,
+  displayBudget,
   displayEmpl,
   addDept,
   addRole,
@@ -31,6 +32,7 @@ const init = async () => {
         name: "chooseTask",
         choices: [
           "View all departments",
+          "View a Department Budget",
           "View all employees",
           "Add a department",
           "Add a role",
@@ -43,6 +45,8 @@ const init = async () => {
     .then((answers) => {
       if (answers.chooseTask === "View all departments") {
         displayDept();
+      } else if (answers.chooseTask === "View a Department Budget") {
+        displayBudget();
       } else if (answers.chooseTask === "View all employees") {
         displayEmpl();
       } else if (answers.chooseTask === "Add a department") {
@@ -53,13 +57,16 @@ const init = async () => {
         addEmpl(answers);
       } else if (answers.chooseTask === "Update an employee role") {
         updateRole(answers);
-      } if (answers.chooseTask !== "EXIT") {
-        init();}
+      } if (answers.chooseTask === "EXIT") {
+        process.exit();
+      }
     });
 }
 
 // Function call to display title of app andinitialize app
 displayTitle();
 init();
+
+// module.exports = init;
 
 

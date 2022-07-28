@@ -22,8 +22,15 @@ const addEmplQuery = `INSERT INTO employee(first_name, last_name, role_id, manag
 VALUES (?, ?, ?, ?);`;
 
 // MODIFY an Employee's Role
-const changeRoleQuery = `
-;`;
+const changeRoleQuery = `UPDATE employee
+SET role_id = ?
+WHERE id = ?;`;
+
+const viewBudgetQuery = `SELECT department.name AS Department, CONCAT('$', SUM(role.salary)) AS Budget
+FROM employee
+INNER JOIN role ON employee.role_id = role.id
+INNER JOIN department ON role.department_id = department.id
+WHERE department.id = ?;`;
 
 module.exports = {
   allDptQuery,
@@ -32,4 +39,5 @@ module.exports = {
   addRoleQuery,
   addEmplQuery,
   changeRoleQuery,
+  viewBudgetQuery,
 };

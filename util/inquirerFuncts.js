@@ -6,6 +6,8 @@ const {dptList,
   emplList} =  require('./dbPromptChoices');
 const cTable = require('console.table');
 
+// const { init } = require('/Users/nifer/Documents/bootcamp/homework/Employee-Tracker-in-SQL-h12/index.js');
+
 // Import queries
 const {
   allDptQuery,
@@ -14,14 +16,31 @@ const {
   addRoleQuery,
   addEmplQuery,
   changeRoleQuery,
+  viewBudgetQuery
 } = require("../config/queries");
 
 async function displayDept() {
   try {
     const departments = await connection.query(allDptQuery);
-    console.log("\n\n\n\n\n\n          ALL DEPARTMENTS\n\n");
     console.table(departments[0]);
-    // !!!!! I want to remove the index reference from the table (above).
+  } catch (error) {
+    console.log(error);
+  }
+  // init();
+}
+
+async function displayBudget() {
+  const viewBudgetPrompt = [
+    {
+    type: "list",
+    message: "Which department do you want to view?",
+    name: "deptName",
+    choices: await dptList(),
+  }];
+  const answers = await inquirer.prompt(viewBudgetPrompt)
+  try {
+    const departments = await connection.query(viewBudgetQuery);
+    console.table(departments[0]);
   } catch (error) {
     console.log(error);
   }
@@ -30,7 +49,6 @@ async function displayDept() {
 async function displayEmpl() {
   try {
     const employees = await connection.query(allEmplQuery);
-    console.log("\n\n\n\n\n\n                                    ALL EMPLOYEES\n\n ");
     console.table(employees[0]);
   } catch (error) {
     console.log(error);
@@ -79,7 +97,7 @@ async function addRole(answers) {
     try {
       connection.query(addRoleQuery, [answers.roleName, answers.roleSalary, answers.roleDepartment]);
       console.log(
-        `${answers.roleName} salary ${answers.roleSalary} has been added to the ${answers.roleDepartment} department.`
+        `${answers.roleName} salary ${answers.roleSalary} has been added.`
       );
     } catch (error) {
       console.log(error);
@@ -116,7 +134,7 @@ async function addEmpl(answers) {
     try {
       connection.query(addEmplQuery, [answers.firstName, answers.lastName, answers.emplRole, answers.emplMgr]);
       console.log(
-        `${answers.firstName} ${answers.lastName}, position ${answers.emplRole}, has been added on ${answers.emplMgr}'s team.`
+        `${answers.firstName} ${answers.lastName} has been added.`
       );
     } catch (error) {
       console.log(error);
@@ -141,10 +159,10 @@ async function updateRole(answers) {
     },
   ];
   await inquirer.prompt(updateRolePrompt).then((answers) => {
-  console.log(answers, "line 134 inquirerPrompts");
+  console.log(answers, "line 145 inquirerPrompts");
   try {
     connection.query(changeRoleQuery, [answers.emplName, answers.emplNewRole]);
-    console.log(`${answers.emplName} Role Updated ${toanswers.emplNewRole}`);
+    console.log("Role Updated");
   } catch (error) {
     console.log(error);
   }
@@ -154,6 +172,7 @@ async function updateRole(answers) {
 
 module.exports = {
   displayDept,
+  displayBudget,
   displayEmpl,
   addDept,
   addRole,
