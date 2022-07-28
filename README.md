@@ -55,27 +55,30 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./images/Screen-Shot-Emply_mgr.png)
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
+### Video Instructions
 
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
+- A video on how to operate Emplyee Manager: [Demo video](https://your-solution-url.com)
 
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
 
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
 ## My process
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS
+
+NodeJS
+- JavaScript
+- NPM Inquirer
+- NPM console.table
+- SQL​
+- MySQL2
+
+
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 
@@ -109,9 +112,7 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ### Useful resources
 
-- [Creating Aliases](https://stackoverflow.com/questions/1435177/why-does-this-sql-code-give-error-1066-not-unique-table-alias-user) -
-
-https://www.mysqltutorial.org/mysql-alias/
+- [ASCII Font Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) - You can type in text, and it will display it in a variety of ASCII fonts to choose from.
 
 - [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
 

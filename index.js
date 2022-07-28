@@ -2,13 +2,6 @@
 const inquirer = require("inquirer");
 const cTable = require('console.table');
 
-// List of choices for inquirer prompts imported
-// const { dptList,
-// roleList,
-// mgrList,
-// emplList
-// } = require('./util/dbPromptChoices');
-
 // Require title
 const displayTitle = require('./util/EmployMgrASCI');
 
