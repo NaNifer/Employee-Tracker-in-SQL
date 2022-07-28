@@ -9,6 +9,12 @@ INNER JOIN role ON employee.role_id = role.id
 LEFT JOIN employee AS mgr ON employee.manager_id = mgr.id 
 INNER JOIN department ON role.department_id = department.id;`;
 
+const viewBudgetQuery = `SELECT department.name AS Department, CONCAT('$', SUM(role.salary)) AS Budget
+FROM employee
+INNER JOIN role ON employee.role_id = role.id
+INNER JOIN department ON role.department_id = department.id
+WHERE department.id = ?;`;
+
 // ADD a department with 'deptName' from prompts
 const addDptQuery = `INSERT INTO department(name)
 VALUES (?);`;
@@ -26,11 +32,6 @@ const changeRoleQuery = `UPDATE employee
 SET role_id = ?
 WHERE id = ?;`;
 
-const viewBudgetQuery = `SELECT department.name AS Department, CONCAT('$', SUM(role.salary)) AS Budget
-FROM employee
-INNER JOIN role ON employee.role_id = role.id
-INNER JOIN department ON role.department_id = department.id
-WHERE department.id = ?;`;
 
 module.exports = {
   allDptQuery,

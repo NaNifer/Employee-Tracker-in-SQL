@@ -39,8 +39,8 @@ async function displayBudget() {
   }];
   const answers = await inquirer.prompt(viewBudgetPrompt)
   try {
-    const departments = await connection.query(viewBudgetQuery);
-    console.table(departments[0]);
+    const budgets = await connection.query(viewBudgetQuery, answers.deptName);
+    console.table(budgets[0]);
   } catch (error) {
     console.log(error);
   }
@@ -159,7 +159,6 @@ async function updateRole(answers) {
     },
   ];
   await inquirer.prompt(updateRolePrompt).then((answers) => {
-  console.log(answers, "line 145 inquirerPrompts");
   try {
     connection.query(changeRoleQuery, [answers.emplName, answers.emplNewRole]);
     console.log("Role Updated");
