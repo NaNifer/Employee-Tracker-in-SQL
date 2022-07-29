@@ -7,11 +7,11 @@
   - [User Story](#user-story)
   - [Acceptance Criteria](#acceptance-criteria)
   - [Screenshot](#screenshot)
+  - [Video Instructions](#video-instructions)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
@@ -70,7 +70,6 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 ### Built with
 
-
 NodeJS
 - JavaScript
 - NPM Inquirer
@@ -78,57 +77,24 @@ NodeJS
 - SQL​
 - MySQL2
 
-
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
-
 ### What I learned
 
-On delete set to null
+I learned a lot about both sql, retreiving a putting data into a database, and the need for async functions when running code.
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+Some of the syntax for sql was new to me. For example, a fellow classmate taught me that set ON DELETE SET NULL for a foreign key was important. When a foreign key is "set null on delete", then if a record in the parent table is deleted, then the corresponding records in the child table will have the foreign key fields set to NULL. This way, the records in the child table will not be deleted in SQL Server.
 
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-
-If you want more help with writing markdown, check out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
-
-### Continued development
-
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+I also learned more about setting aliases in a db query. While useing inquirer, it needed keys of "name" and "value" in order to work. By creating aliases with sql with corrasonding names to the inquirer keys, I was able to access the data with very little extra code.
 
 ### Useful resources
 
 - [ASCII Font Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) - You can type in text, and it will display it in a variety of ASCII fonts to choose from.
 
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
 
 ## Author
 
 - GitHub - [NaNifer](https://github.com/NaNifer)
 - Portfolio - [Nifer Kilakila](https://nanifer.github.io/Nifer-Kilakila-Portfolio-h2/)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
 ## Acknowledgments
 
-Nolan suggested console.table for displaying queries. Corrected me about my confusion of exporting/inporting other functions.
-
-A huge shout out to [nullaus](https://github.com/nullaus) who helped me understand how databases, routes, and asychronous queries.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+My classmate Nolan suggested console.table for displaying queries, and clear up my major confusion about how exporting/inporting functions actually work. Also a shout out to [nullaus](https://github.com/nullaus) who helped me understand hoistin, infinite loops,  and asychronous queries.

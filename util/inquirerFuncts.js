@@ -1,12 +1,12 @@
 const connection = require("../config/connection");
 const inquirer = require("inquirer");
+const cTable = require('console.table');
+
+// Import promptChoices from db
 const {dptList,
   roleList,
   mgrList,
   emplList} =  require('./dbPromptChoices');
-const cTable = require('console.table');
-
-// const { init } = require('/Users/nifer/Documents/bootcamp/homework/Employee-Tracker-in-SQL-h12/index.js');
 
 // Import queries
 const {
@@ -19,6 +19,53 @@ const {
   viewBudgetQuery
 } = require("../config/queries");
 
+// Uppercases user input
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+
+// Initialize Inquirer
+const init = async () => {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "What would you like to do?",
+        name: "chooseTask",
+        choices: [
+          "View all departments",
+          "View a Department Budget",
+          "View all employees",
+          "Add a department",
+          "Add a role",
+          "Add an employee",
+          "Update an employee role",
+          "EXIT",
+        ],
+      },
+    ])
+    .then((answers) => {
+      if (answers.chooseTask === "View all departments") {
+        displayDept();
+      } else if (answers.chooseTask === "View a Department Budget") {
+        displayBudget();
+      } else if (answers.chooseTask === "View all employees") {
+        displayEmpl();
+      } else if (answers.chooseTask === "Add a department") {
+        addDept(answers);
+      } else if (answers.chooseTask === "Add a role") {
+        addRole(answers);
+      } else if (answers.chooseTask === "Add an employee") {
+        addEmpl(answers);
+      } else if (answers.chooseTask === "Update an employee role") {
+        updateRole(answers);
+      } if (answers.chooseTask === "EXIT") {
+        process.exit();
+      }
+    });
+}
+
 async function displayDept() {
   try {
     const departments = await connection.query(allDptQuery);
@@ -26,7 +73,7 @@ async function displayDept() {
   } catch (error) {
     console.log(error);
   }
-  // init();
+  init();
 }
 
 async function displayBudget() {
@@ -44,6 +91,7 @@ async function displayBudget() {
   } catch (error) {
     console.log(error);
   }
+  init();
 }
 
 async function displayEmpl() {
@@ -53,6 +101,7 @@ async function displayEmpl() {
   } catch (error) {
     console.log(error);
   }
+  init();
 }
 
 async function addDept(answers) {
@@ -64,13 +113,15 @@ async function addDept(answers) {
     },
   ];
   await inquirer.prompt(addDeptPrompt).then((answers) => {
+    dptNameCap = capitalizeFirstLetter(answers.deptName);
   try {
-    connection.query(addDptQuery, answers.deptName);
-    console.log(`${answers.deptName} Department Added`);
+    connection.query(addDptQuery, dptNameCap);
+    console.log(`${dptNameCap} Department Added`);
   } catch (error) {
     console.log(error);
   }
 });
+init();
 }
 
 async function addRole(answers) {
@@ -94,15 +145,17 @@ async function addRole(answers) {
     },
   ];
   await inquirer.prompt(addRolePrompt).then((answers) => {
+    roleNameCap = capitalizeFirstLetter(answers.roleName);
     try {
-      connection.query(addRoleQuery, [answers.roleName, answers.roleSalary, answers.roleDepartment]);
+      connection.query(addRoleQuery, [roleNameCap, answers.roleSalary, answers.roleDepartment]);
       console.log(
-        `${answers.roleName} salary ${answers.roleSalary} has been added.`
+        `${roleNameCap} salary ${answers.roleSalary} has been added.`
       );
     } catch (error) {
       console.log(error);
     }
   });
+  init();
 }
 
 async function addEmpl(answers) {
@@ -131,15 +184,18 @@ async function addEmpl(answers) {
     },
   ];
   await inquirer.prompt(addEmplPrompt).then((answers) => {
+    firstNameCap = capitalizeFirstLetter(answers.firstName);
+    lastNameCap = capitalizeFirstLetter(answers.lastName);
     try {
-      connection.query(addEmplQuery, [answers.firstName, answers.lastName, answers.emplRole, answers.emplMgr]);
+      connection.query(addEmplQuery, [firstNameCap, lastNameCap, answers.emplRole, answers.emplMgr]);
       console.log(
-        `${answers.firstName} ${answers.lastName} has been added.`
+        `${firstNameCap} ${lastNameCap} has been added.`
       );
     } catch (error) {
       console.log(error);
     }
   });
+  init();
 }
 
 async function updateRole(answers) {
@@ -166,15 +222,10 @@ async function updateRole(answers) {
     console.log(error);
   }
 });
+init();
 }
 
 
 module.exports = {
-  displayDept,
-  displayBudget,
-  displayEmpl,
-  addDept,
-  addRole,
-  addEmpl,
-  updateRole,
+  init
 };
