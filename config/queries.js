@@ -9,6 +9,11 @@ INNER JOIN role ON employee.role_id = role.id
 LEFT JOIN employee AS mgr ON employee.manager_id = mgr.id 
 INNER JOIN department ON role.department_id = department.id;`;
 
+// VIEW all roles
+const allRolesQuery = `SELECT role.id AS 'Role ID', role.title AS Title, department.name AS Department, CONCAT('$', role.salary) AS Salary
+FROM role AS role
+LEFT JOIN department AS department ON role.department_id = department.id;`;
+
 const viewBudgetQuery = `SELECT department.name AS Department, CONCAT('$', SUM(role.salary)) AS Budget
 FROM employee
 INNER JOIN role ON employee.role_id = role.id
@@ -36,6 +41,7 @@ WHERE id = ?;`;
 module.exports = {
   allDptQuery,
   allEmplQuery,
+  allRolesQuery,
   addDptQuery,
   addRoleQuery,
   addEmplQuery,

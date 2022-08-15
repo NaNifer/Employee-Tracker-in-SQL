@@ -12,6 +12,7 @@ const {dptList,
 const {
   allDptQuery,
   allEmplQuery,
+  allRolesQuery,
   addDptQuery,
   addRoleQuery,
   addEmplQuery,
@@ -37,6 +38,7 @@ const init = async () => {
           "View all departments",
           "View a Department Budget",
           "View all employees",
+          "View all roles",
           "Add a department",
           "Add a role",
           "Add an employee",
@@ -52,6 +54,8 @@ const init = async () => {
         displayBudget();
       } else if (answers.chooseTask === "View all employees") {
         displayEmpl();
+      } else if (answers.chooseTask === "View all roles") {
+        displayRoles();
       } else if (answers.chooseTask === "Add a department") {
         addDept(answers);
       } else if (answers.chooseTask === "Add a role") {
@@ -98,6 +102,16 @@ async function displayEmpl() {
   try {
     const employees = await connection.query(allEmplQuery);
     console.table(employees[0]);
+  } catch (error) {
+    console.log(error);
+  }
+  init();
+}
+
+async function displayRoles() {
+  try {
+    const roles = await connection.query(allRolesQuery);
+    console.table(roles[0]);
   } catch (error) {
     console.log(error);
   }
